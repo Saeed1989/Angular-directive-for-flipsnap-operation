@@ -2,20 +2,28 @@
  * Flipsnap Directive
  *
  * @version  0.1.1
- * @url 
+ * @url
  *
  * Copyright Md Saeed Sharman.
  * Licensed under the MIT License:
  * http://www.opensource.org/licenses/mit-license.php
  */
 
-import { AfterViewInit, Directive, Input, Output, EventEmitter, ElementRef, OnDestroy } from "@angular/core";
+import {
+  AfterViewInit,
+  Directive,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  OnDestroy,
+} from '@angular/core';
 declare var Flipsnap: any;
 
 /** Interface point move event object */
 export interface IFsPointMoveEvent {
-    orgEvent: Event;
-    point: number;
+  orgEvent: Event;
+  point: number;
 }
 
 /** Inteface for the swipe process options */
@@ -25,12 +33,11 @@ export interface IFsOptions {
   transitionDuration?: number;
   disableTouch?: boolean;
   disable3d?: boolean;
-  threshold?:number;
+  threshold?: number;
 }
 
-@Directive({ selector: '[fsnap]'})
+@Directive({ selector: '[fsnap]' })
 export class FlipsnapDirective implements AfterViewInit, OnDestroy {
-
   /** Flipsnap options for swipe operation */
   @Input() options: IFsOptions = {};
 
@@ -60,7 +67,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.initFs();
-    }, 10)
+    }, 10);
   }
 
   /**
@@ -77,7 +84,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
     this.destroy();
     setTimeout(() => {
       this.initFs();
-    }, 10)
+    }, 10);
   }
 
   /**
@@ -87,7 +94,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
    */
   moveToPoint(point: number, transitionDuration?: number): boolean {
     if (this.fsInstance) {
-      this.fsInstance.moveToPoint(point,transitionDuration);
+      this.fsInstance.moveToPoint(point, transitionDuration);
       return true;
     }
     return false;
@@ -101,7 +108,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
     if (this.fsInstance && this.fsInstance.hasNext()) {
       this.fsInstance.toNext(transitionDuration);
       return true;
-    }  
+    }
     return false;
   }
 
@@ -113,7 +120,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
     if (this.fsInstance && this.fsInstance.hasPrev()) {
       this.fsInstance.toPrev(transitionDuration);
       return true;
-    }  
+    }
     return false;
   }
 
@@ -133,10 +140,14 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
    */
   destroy(): boolean {
     if (this.fsInstance) {
-        this.fsInstance.element.removeEventListener('fspointmove', this.pointMoveCallBackFn, false);
-        this.fsInstance.destroy();
-        this.fsInstance = null;
-        return true;
+      this.fsInstance.element.removeEventListener(
+        'fspointmove',
+        this.pointMoveCallBackFn,
+        false
+      );
+      this.fsInstance.destroy();
+      this.fsInstance = null;
+      return true;
     }
     return false;
   }
@@ -147,7 +158,11 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   private initFs(): boolean {
     if (!this.fsInstance) {
       this.fsInstance = new Flipsnap(this.elem, this.options);
-      this.fsInstance.element.addEventListener('fspointmove', this.pointMoveCallBackFn, false);
+      this.fsInstance.element.addEventListener(
+        'fspointmove',
+        this.pointMoveCallBackFn,
+        false
+      );
       this.initComplete.emit();
       return true;
     }
@@ -159,13 +174,12 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
    * @param event Event
    */
   private pointMoveCallBackFn = (event: Event) => {
-    if(this.fsInstance) {
+    if (this.fsInstance) {
       let fsPointMoveEvent: IFsPointMoveEvent = {
         orgEvent: event,
-        point: this.fsInstance.currentPoint
-      }
+        point: this.fsInstance.currentPoint,
+      };
       this.pointMove.emit(fsPointMoveEvent);
     }
-  }
-
+  };
 }

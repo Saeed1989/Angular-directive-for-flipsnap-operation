@@ -7,16 +7,12 @@ import { TestPageComponent } from './components/pages/test-page/test-page.compon
 import { FlipsnapDirective } from './directives/flipsnap.directive';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TestPageComponent,
-    FlipsnapDirective
-  ],
+  declarations: [AppComponent, TestPageComponent, FlipsnapDirective],
   imports: [
     BrowserModule,
     RouterModule.forRoot(rootRouterConfig, { useHash: false }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
