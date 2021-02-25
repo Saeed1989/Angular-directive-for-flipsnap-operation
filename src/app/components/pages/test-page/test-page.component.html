@@ -1,14 +1,165 @@
-<section>
-  <h2>Demo</h2>
-  <section class="demo" id="demo-simple">
-    <h3>simple</h3>
-    <div class="viewport">
-      <div appFsnap class="flipsnap">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
+<div class="container">
+  <div>
+    <h2>Sample use case of the directive to use flipsnap.js</h2>
+    <div class="sample sample-simple">
+      <h3>Basic use</h3>
+      <div class="viewport">
+        <div appFsnap class="contents">
+          <div class="content">1</div>
+          <div class="content">2</div>
+          <div class="content">3</div>
+        </div>
       </div>
     </div>
-  </section>
-  <section></section>
-</section>
+  </div>
+
+  <div class="sample sample-distance">
+    <h3>Define distance</h3>
+    <div class="viewport">
+      <div appFsnap [options]="optDistance" class="contents">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample sample-maxPoint">
+    <h3>Define maxPoint</h3>
+    <div class="viewport">
+      <div appFsnap [options]="optMaxPoint" class="contents">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+        <div class="content">6</div>
+        <div class="content">7</div>
+        <div class="content">8</div>
+        <div class="content">9</div>
+        <div class="content">10</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample sample-transitionDuration">
+    <h3>Define transitionDuration</h3>
+    <div class="viewport">
+      <div appFsnap [options]="optTsDuration" class="contents">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sample sample-pointmove">
+    <h3>Move(next and prev) and use pointmove event</h3>
+    <div class="viewport">
+      <div
+        #fsMovePoint
+        appFsnap
+        (pointMove)="pointMoveEvent($event)"
+        class="contents"
+      >
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+      </div>
+    </div>
+    <div class="pointer">
+      <span [ngClass]="{ current: point === 1 }"></span>
+      <span [ngClass]="{ current: point === 2 }"></span>
+      <span [ngClass]="{ current: point === 3 }"></span>
+      <span [ngClass]="{ current: point === 4 }"></span>
+      <span [ngClass]="{ current: point === 5 }"></span>
+    </div>
+    <p class="controls">
+      <button class="prev" (click)="movePrev(fsMovePointInstance)">prev</button>
+      <button class="next" (click)="moveNext(fsMovePointInstance)">next</button>
+    </p>
+  </div>
+
+  <div class="sample sample-refresh">
+    <h3>Calling refresh function</h3>
+    <div class="viewport">
+      <div
+        #fsRefresh
+        appFsnap
+        class="contents"
+        [ngStyle]="{ width: contentsWidth }"
+      >
+        <div *ngFor="let content of contents" class="content">
+          {{ content.label }}
+        </div>
+      </div>
+    </div>
+    <p class="controls">
+      <button class="add" (click)="addContent()">add</button>
+      <button class="remove" (click)="removeContent()">remove</button>
+    </p>
+  </div>
+
+  <div class="sample sample-moveToPoint">
+    <h3>Calling moveToPoint</h3>
+    <div class="viewport">
+      <div #fsMoveToPoint appFsnap class="contents">
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+        <div class="content">6</div>
+        <div class="content">7</div>
+        <div class="content">8</div>
+        <div class="content">9</div>
+        <div class="content">10</div>
+      </div>
+    </div>
+    <p class="controls">
+      <input type="number" size="3" class="num" [(ngModel)]="pointInput" />
+      <button class="go" (click)="movePoint()">Go</button>
+    </p>
+  </div>
+
+  <div class="sample sample-disableTouch">
+    <h3>Use of disableTouch</h3>
+    <div class="viewport">
+      <div
+        #fsDisabledTouch
+        appFsnap
+        [options]="optDisableTouch"
+        class="contents"
+      >
+        <div class="content">1</div>
+        <div class="content">2</div>
+        <div class="content">3</div>
+        <div class="content">4</div>
+        <div class="content">5</div>
+      </div>
+    </div>
+    <p class="controls">
+      <label
+        >disableTouch<input
+          type="checkbox"
+          class="isDisable"
+          [(ngModel)]="isTouchDisabled"
+          (ngModelChange)="disableChanged()"
+      /></label>
+    </p>
+    <p class="controls">
+      <button class="prev" (click)="movePrev(fsDisabledTouchInstance)">
+        prev
+      </button>
+      <button class="next" (click)="moveNext(fsDisabledTouchInstance)">
+        next
+      </button>
+    </p>
+  </div>
+</div>

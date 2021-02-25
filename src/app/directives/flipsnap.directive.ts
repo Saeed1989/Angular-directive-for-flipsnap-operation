@@ -1,5 +1,5 @@
 /**
- * Flipsnap Directive
+ * flipsnap Directive
  *
  * @version  0.1.1
  * @url https://github.com/Saeed1989/Angular-directive-for-flipsnap-operation
@@ -18,43 +18,52 @@ import {
   ElementRef,
   OnDestroy,
 } from '@angular/core';
+
 declare var Flipsnap: any;
 
-/** Interface point move event object */
+/** interface point move event object */
 export interface IFsPointMoveEvent {
+  /** native event of slipe elemnt */
   orgEvent: Event;
+  /** the point that move happens - starts with 0 */
   point: number;
 }
 
-/** Inteface for the swipe process options */
+/** interface for the swipe process options */
 export interface IFsOptions {
+  /**  stop point count. default is auto calculate from element item count. */
   maxPoint?: number;
+  /** move distance. default is auto calculate from element width and maxPont. */
   distance?: number;
+  /** transition duration (millisecond). default is 350. */
   transitionDuration?: number;
+  /** when set true, touch event is disabled. Only handling button or etc interface. default is false. */
   disableTouch?: boolean;
+  /** when support 3D transform browser and this option set true, it is not used 3D transform and use 2D transform. */
   disable3d?: boolean;
+  /** pixel count of touch mvoe after which slide starts */
   threshold?: number;
 }
 
 @Directive({ selector: '[appFsnap]' })
 export class FlipsnapDirective implements AfterViewInit, OnDestroy {
-  /** Flipsnap options for swipe operation */
+  /** flipsnap options for swipe operation */
   @Input() options: IFsOptions = {};
 
-  /** Swipe point move */
+  /** slide point move */
   @Output() pointMove = new EventEmitter<IFsPointMoveEvent>();
 
-  /** Initialise complete event */
+  /** initialise complete event */
   @Output() initComplete = new EventEmitter();
 
-  /** Instance for flipsnap */
+  /** instance for flipsnap */
   private fsInstance: any;
 
-  /** Swiping HTML element */
+  /** sliding HTML element */
   private elem: HTMLElement;
 
   /**
-   * Constructor
+   * constructor
    * @param elementRef
    */
   constructor(private elementRef: ElementRef) {
@@ -62,7 +71,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Init process after view is initialised
+   * init process after view is initialised
    */
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -71,14 +80,14 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Clean up process when the component is destroyed
+   * clean up process when the component is destroyed
    */
   ngOnDestroy(): void {
     this.destroy();
   }
 
   /**
-   * Reinitialise the view and process
+   * reinitialise the view and process
    */
   reInitialise(): void {
     this.destroy();
@@ -88,7 +97,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Move to given swipe position
+   * move to given swipe position
    * @param point swipe position
    * @param transitionDuration time duration for the swipe process
    */
@@ -101,7 +110,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Move to next swipe position
+   * move to next swipe position
    * @param transitionDuration time durtion for the swipe process
    */
   moveToNext(transitionDuration?: number): boolean {
@@ -113,7 +122,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Move to previous swipe positon
+   * move to previous swipe positon
    * @param transitionDuration time duration for the swipe process
    */
   moveToPrev(transitionDuration?: number): boolean {
@@ -125,7 +134,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Refresh view and the process
+   * refresh view and the process
    */
   refresh(): boolean {
     if (this.fsInstance) {
@@ -136,7 +145,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Destory the process
+   * destroy the process
    */
   destroy(): boolean {
     if (this.fsInstance) {
@@ -153,7 +162,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Initialise view and the process
+   * initialise view and the process
    */
   private initFs(): boolean {
     if (!this.fsInstance) {
@@ -170,7 +179,7 @@ export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * Call back function for the point move event
+   * call back function for the point move event
    * @param event Event
    */
   private pointMoveCallBackFn = (event: Event) => {
