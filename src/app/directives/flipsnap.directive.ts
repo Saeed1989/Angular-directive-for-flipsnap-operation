@@ -2,7 +2,7 @@
  * Flipsnap Directive
  *
  * @version  0.1.1
- * @url
+ * @url https://github.com/Saeed1989/Angular-directive-for-flipsnap-operation
  *
  * Copyright Md Saeed Sharman.
  * Licensed under the MIT License:
@@ -36,7 +36,7 @@ export interface IFsOptions {
   threshold?: number;
 }
 
-@Directive({ selector: '[fsnap]' })
+@Directive({ selector: '[appFsnap]' })
 export class FlipsnapDirective implements AfterViewInit, OnDestroy {
   /** Flipsnap options for swipe operation */
   @Input() options: IFsOptions = {};
