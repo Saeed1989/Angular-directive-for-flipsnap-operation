@@ -5,7 +5,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## About
 
 This is an Angular directive to use flipsnap.js library.
-flipsnap.js is a JavaScript library that provides UI of snap and slide.(http://hokaccha.github.io/js-flipsnap/)
+flipsnap.js is a JavaScript library that provides UI of snap and slide.(http://hokaccha.github.io/js-flipsnap/)<br/><br/>
+![](demo.gif)
 
 ## Development server
 
