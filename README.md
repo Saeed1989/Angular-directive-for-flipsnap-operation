@@ -28,7 +28,7 @@ The basic use case is given below. Details use case is given on the test page.
       <div class="content">The content to flip and snap</div>
     </div>
 ```
-appFsnap: The directive selector
+appFsnap: The directive selector<br/>
 options: Options for the flip and snap process
 
 ### Options
