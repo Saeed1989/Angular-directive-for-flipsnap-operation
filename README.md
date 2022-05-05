@@ -9,7 +9,7 @@ flipsnap.js is a JavaScript library. (http://hokaccha.github.io/js-flipsnap/)<br
 
 This repository is built on top of Angular however in the implementation detail, we will find other supporting technologies as well.
 
-- [Flipsnap.js]] - flipsnap.js is a JavaScript library that provides UI of snap and slide.
+- [Flipsnap.js] - flipsnap.js is a JavaScript library that provides UI of snap and slide.
 - [Angular] - A JavaScript framework for building user interfaces]
 
 ## Parts
@@ -24,9 +24,9 @@ On this page sample use cases of flipsnap directive are added.
 The basic use case is given below. Details use case is given on the test page.
 
 ```sh
-    <div appFsnap [options]="flipSnapOptions" class="contents">
-      <div class="content">The content to flip and snap</div>
-    </div>
+  <div appFsnap [options]="flipSnapOptions" class="contents">
+    <div class="content">The content to flip and snap</div>
+  </div>
 ```
 appFsnap: The directive selector<br/>
 options: Options for the flip and snap process
