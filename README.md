@@ -24,25 +24,29 @@ On this page sample use cases of flipsnap directive are added.
 The basic use case is given below. Details use case is given on the test page.
 
 ```sh
-      <div appFsnap [options]="flipSnapOptions" class="contents">
-        <div class="content">The content to flip and snap</div>
-      </div>
+    <div appFsnap [options]="flipSnapOptions" class="contents">
+      <div class="content">The content to flip and snap</div>
     </div>
 ```
+appFsnap: The directive selector
+options: Options for the flip and snap process
+
 ### Options
 
-- maxPoint
+- maxPoint: 
     This is the stop point count. The default value is auto-calculated from the element item count. 
-- distance
+- distance: 
     This is the move distance. The default value is auto calculated from element width and maxPont. 
-- transitionDuration
+- transitionDuration: 
     This is the transition duration (millisecond). The default value is 350. 
-- disableTouch
+- disableTouch: 
     When set true, the touch event is disabled. Only handling button or etc interface. default is false.
-- disable3d
+- disable3d: 
     When supporting 3D transform browser and this option is set to true, it is not used 3D transform and uses 2D transform. 
-- threshold
+- threshold: 
     This is the pixel count of the touch move after which the slide starts.
+
+## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
